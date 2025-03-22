@@ -1,5 +1,7 @@
 # Lo importamos para ir limpiando la consola mientras el software se ejecuta
 from os import system
+
+# Lo importamos para detener la ejecución del programa en cualquier momento
 import sys
 
 # Se importa el modulo donde se realizarán los procesos
@@ -16,13 +18,13 @@ def Bienvenida():
     print(" 1.Iniciar Sesión, 2.Registrarse, 3.Cambiar Contraseña, 0.Salir")
     opcion = int(input("Elija una opción: "))
     print("--------------------------------------")
-    # Se llama a la siguiente función y se le pasa como parametro la opción que el usuario eligió
+    # Se llama a la siguiente función y se le pasa como parámetro la opción que el usuario eligió
     return desiciones(opcion)
 
 def desiciones(opcion):
-    # Se hace uso del metodo try para lanzar una excepción si algo falla
+    # Se hace uso del método try para lanzar una excepción si algo falla
     try:
-        # Se usa el ciclo while para verificar cual opción escogio el usuario
+        # Se usa el ciclo while para verificar cual opción escogió el usuario
         while opcion != 0:
             # Se verifica si la opción escogida por el usuario no está definida
             if opcion < 1 or opcion > 3:
@@ -31,7 +33,7 @@ def desiciones(opcion):
                 print("                  To Do            ")
                 print("La opción ingresada no es correcta, intente de nuevo")
                 print("-------------------------------------------------------------------")
-                # Se llama nuevamente al metodo de Bienvenida para reiniciar el proceso
+                # Se llama nuevamente al método de Bienvenida para reiniciar el proceso
                 Bienvenida()
             
             # Se verifica si el usuario quiere iniciar sesión en el software
@@ -49,7 +51,7 @@ def desiciones(opcion):
                 
                 # Se llama la función "Registrar_Usuario" para llevar al usuario hasta allí
                 Crear_Usuario.Registrar_Usuario()
-                # Se llama nuevamente al metodo de Bienvenida para reiniciar el proceso
+                # Se llama nuevamente al método de Bienvenida para reiniciar el proceso
                 Bienvenida()
 
             # Se verifica si el usuario quiere cambiar la contraseña de su cuenta
@@ -59,7 +61,7 @@ def desiciones(opcion):
                 
                 # Se llama la función "Asignar_Nueva_Contrasena" para llevar al usuario hasta allí
                 Cambiar_Contrasena.Asignar_Nueva_Contrasena()
-                # Se llama nuevamente al metodo de Bienvenida para reiniciar el proceso
+                # Se llama nuevamente al método de Bienvenida para reiniciar el proceso
                 Bienvenida()
 
         # Se le da al usuario un mensaje de despedida al usuario cuando finaliza todo el proceso
@@ -75,7 +77,7 @@ def desiciones(opcion):
         print("                  To Do            ")
         print(f"{exc}, intentalo nuevamente")
         print("-------------------------------------------------------------------")
-        # Se llama nuevamente al metodo de Bienvenida para reiniciar el proceso
+        # Se llama nuevamente al método de Bienvenida para reiniciar el proceso
         Bienvenida()
 
 # Verificar si la tabla "Usuarios" ya está creada

@@ -6,6 +6,9 @@ from todo_app.controladores.Controlador_Usuarios import Controlador_Usuarios
 from todo_app.model.Usuario import Usuario
 
 class Cambiar_Contrasena:
+    """
+    Clase que contiene el método para cambiar la contraseña de un usuario
+    """
     # Metodo donde se realizará todo el proceso de cambio de contraseña
     def Asignar_Nueva_Contrasena():
         print("---------------------------------------------------------------------")

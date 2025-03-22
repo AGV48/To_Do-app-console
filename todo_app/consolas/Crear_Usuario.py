@@ -6,6 +6,9 @@ from todo_app.controladores.Controlador_Usuarios import Controlador_Usuarios
 from todo_app.model.Usuario import Usuario
 
 class Crear_Usuario:
+    """
+    Clase que contiene el método para registrar un usuario
+    """
     # Metodo donde se realizará todo el proceso de registro
     def Registrar_Usuario():
         print("---------------------------------------------------------------------")

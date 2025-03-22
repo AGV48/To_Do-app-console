@@ -7,7 +7,10 @@ from todo_app.controladores.Controlador_Usuarios import Controlador_Usuarios
 from todo_app.model.Usuario import Usuario
 
 class Iniciar_Sesion:
-    # Metodo donde se realizará todo el proceso de inicio de sesión
+    """
+    Clase que contiene el método para iniciar sesión
+    """
+    # Método donde se realizará todo el proceso de inicio de sesión
     def Ingresar_Al_Software():
         print("---------------------------------------------------------------------")
         print("                     To Do                 ")

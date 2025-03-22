@@ -12,10 +12,10 @@ from todo_app.model.Tarea import Tarea
 
 class Controlador_Usuarios:
 
-    # Todas las consultas se realizan mediante un cursor, por lo que se crea un metodo para obtenerlo
+    # Todas las consultas se realizan mediante un cursor, por lo que se crea un método para obtenerlo
     def Obtener_Cursor():
         """
-        Crea la conexion a la base de datos y retorna un cursor para ejecutar instrucciones
+        Crea la conexión a la base de datos y retorna un cursor para ejecutar instrucciones
         """
         DATABASE = Secret_Config.PGDATABASE
         USER = Secret_Config.PGUSER
@@ -29,7 +29,7 @@ class Controlador_Usuarios:
         cursor = connection.cursor()
         return cursor
     
-    # Metodo para crear la tabla usuarios en la base de datos
+    # Método para crear la tabla usuarios en la base de datos
     def Crear_Tabla_Usuarios():
         """ 
         Crea la tabla de usuarios en la BD 
@@ -80,10 +80,10 @@ class Controlador_Usuarios:
             cursor.connection.rollback()
             return "Tabla Existente"
 
-    # Método para crear la tipo de prioridades en la base de datos
+    # Método para crear el tipo de prioridades en la base de datos
     def Crear_Prioridades():
         """ 
-        Crea la tabla de prioridades en la base de datos 
+        Crea el tipo de prioridades en la base de datos 
         """
         try:
             # Se obtiene el cursor para tener la conexión con la base de datos
@@ -95,39 +95,45 @@ class Controlador_Usuarios:
         except Exception as e:
             # Si ocurre algún error, revierte la transacción y devuelve un mensaje
             cursor.connection.rollback()
-            return f"Error al crear la tabla de prioridades: {e}"
+            return f"Error al crear el tipo de prioridades: {e}"
 
         return "Tipo Creado"
 
-    # Metodo para insertar un usuario en la base de datos
+    # Método para insertar un usuario en la base de datos
     def Insertar_Usuario( usuario : Usuario ):
-            """ 
-            Recibe una instancia de la clase Usuario y la inserta en la tabla respectiva
-            """
-            #Se obtiene el cursor para tener la conexión con la base de datos
-            cursor = Controlador_Usuarios.Obtener_Cursor()
+        """ 
+        Inserta un usuario en la tabla de usuarios
 
-            # Se realizan las verificaciones de que todos los campos ingresados sean correctos
-            Controlador_Usuarios.verificarValores_vacios(usuario.nombre, usuario.contrasena)
-            Controlador_Usuarios.verificarContrasena(str(usuario.contrasena))
-            Controlador_Usuarios.verificarExistenciaUsuario_Insercion(usuario.nombre)
-            
-            # Si todas las verificaciones fueron exitosas, se inserta en usuario en la base de datos
-            cursor.execute(f"""insert into usuarios (usuario, contrasena) values ('{usuario.nombre}', '{usuario.contrasena}')""")
+        Entradas:
+            usuario : Usuario -> Objeto de la clase Usuario con los datos del usuario a insertar
+        """
+        #Se obtiene el cursor para tener la conexión con la base de datos
+        cursor = Controlador_Usuarios.Obtener_Cursor()
 
-            # Confirma los cambios realizados en la base de datos
-            # Si no se llama, los cambios no quedan aplicados
-            cursor.connection.commit()
+        # Se realizan las verificaciones de que todos los campos ingresados sean correctos
+        Controlador_Usuarios.verificarValores_vacios(usuario.nombre, usuario.contrasena)
+        Controlador_Usuarios.verificarContrasena(str(usuario.contrasena))
+        Controlador_Usuarios.verificarExistenciaUsuario_Insercion(usuario.nombre)
+        
+        # Si todas las verificaciones fueron exitosas, se inserta en usuario en la base de datos
+        cursor.execute(f"""insert into usuarios (usuario, contrasena) values ('{usuario.nombre}', '{usuario.contrasena}')""")
 
-            # Se limpia la consola para que todo se vea organizado
-            system("clear")
-            print("USUARIO CREADO CORRECTAMENTE")
-            print("\n")
+        # Confirma los cambios realizados en la base de datos
+        # Si no se llama, los cambios no quedan aplicados
+        cursor.connection.commit()
+
+        # Se limpia la consola para que todo se vea organizado
+        system("clear")
+        print("USUARIO CREADO CORRECTAMENTE")
+        print("\n")
     
-    # Metodo para buscar usuarios en la base de datos y ver si existen
+    # Método para buscar usuarios en la base de datos y ver si existen
     def Buscar_Usuario( usuario_buscado ):
         """ 
         Trae un usuario de la tabla de usuarios por el nombre
+
+        Entradas:
+            usuario_buscado : str -> Nombre del usuario a buscar
         """
         #Se obtiene el cursor para tener la conexión con la base de datos
         cursor = Controlador_Usuarios.Obtener_Cursor()
@@ -143,10 +149,14 @@ class Controlador_Usuarios:
             # Si el usuario si existe, retorna TRUE
             return True
 
-    # Metodo para actualizar la contraseña de un usuario
+    # Método para actualizar la contraseña de un usuario
     def Actualizar_Usuario( usuario_buscado, datos_actualizar: Usuario ):
         """ 
-        Trae un usuario de la tabla de usuarios por la cedula y actualiza sus valores
+        Trae un usuario de la tabla de usuarios y actualiza sus valores
+
+        Entradas:
+            usuario_buscado : str -> Nombre del usuario a buscar
+            datos_actualizar : Usuario -> Objeto de la clase Usuario con los datos a actualizar
         """
         #Se obtiene el cursor para tener la conexión con la base de datos
         cursor = Controlador_Usuarios.Obtener_Cursor()
@@ -167,10 +177,13 @@ class Controlador_Usuarios:
         system("clear")
         print("CONTRASEÑA ACTUALIZADA CORRECTAMENTE")
 
-    # Metodo para iniciar sesión en el software
+    # Método para iniciar sesión en el software
     def Iniciar_Sesión(usuario):
-        """ 
-        Recibe un usuario (nombre, contraseña) como parametro y busca que estén en la base de datos
+        """
+        Inicia sesión en el software si el usuario y la contraseña son correctos
+
+        Entradas:
+            usuario : Usuario -> Objeto de la clase Usuario con los datos del usuario a iniciar sesión
         """
         #Se obtiene el cursor para tener la conexión con la base de datos
         cursor = Controlador_Usuarios.Obtener_Cursor()
@@ -191,9 +204,12 @@ class Controlador_Usuarios:
 
     # Método para insertar una tarea en la base de datos
     def Insertar_Tarea(tarea, usuario):
-        """ 
-        Inserta una tarea en la tabla tareas asociada a un usuario.
-        Si no existe una categoría, crea la categoría 'General' y la usa por defecto.
+        """
+        Inserta una tarea en la base de datos
+        
+        Entradas:
+            tarea : Tarea -> Objeto de la clase Tarea con los datos de la tarea a insertar
+            usuario : str -> Nombre del usuario al que pertenece la tarea
         """
         # Se obtiene el cursor para tener la conexión con la base de datos
         cursor = Controlador_Usuarios.Obtener_Cursor()
@@ -216,7 +232,10 @@ class Controlador_Usuarios:
     # Método para listar todas las tareas de un usuario
     def Listar_Tareas(usuario: Usuario):
         """ 
-        Devuelve todas las tareas creadas por un usuario específico 
+        Devuelve todas las tareas creadas por un usuario específico
+
+        Entradas:
+            usuario : Usuario -> Objeto de la clase Usuario con los datos del usuario a buscar
         """
 
         #Se obtiene el cursor para tener la conexión con la base de datos
@@ -231,35 +250,14 @@ class Controlador_Usuarios:
         # Se retorna la lista de tareas
         return tareas
 
-    # Método para actualizar una tarea en la base de datos
-    def Actualizar_Tarea(titulo, nueva_tarea: Tarea, usuario: Usuario):
-        """ 
-        Actualiza la información de una tarea en la base de datos si pertenece al usuario especificado 
-        """
-
-        #Se obtiene el cursor para tener la conexión con la base de datos
-        cursor = Controlador_Usuarios.Obtener_Cursor()
-
-        # Se verifica que la tarea pertenezca al usuario antes de actualizar
-        cursor.execute(f"""
-            UPDATE tareas 
-            SET descripcion = '{nueva_tarea.descripcion}', 
-                fecha_limite = '{nueva_tarea.fecha_limite}', 
-                prioridad = '{nueva_tarea.prioridad}' 
-            WHERE titulo = '{titulo}' AND usuario = '{usuario.nombre}'
-        """)
-
-        # Confirma los cambios realizados en la base de datos
-        cursor.connection.commit()
-
-        # Se limpia la consola para que todo se vea organizado
-        system("clear")
-        print("TAREA ACTUALIZADA CORRECTAMENTE")
-
     # Método para eliminar una tarea de la base de datos
     def Eliminar_Tarea(titulo, usuario: Usuario):
-        """ 
-        Elimina una tarea de la base de datos usando su título si pertenece al usuario especificado 
+        """
+        Elimina una tarea de la base de datos
+        
+        Entradas:
+            titulo : str -> Título de la tarea a eliminar
+            usuario : Usuario -> Objeto de la clase Usuario con los datos del usuario a buscar
         """
 
         #Se obtiene el cursor para tener la conexión con la base de datos
@@ -278,7 +276,7 @@ class Controlador_Usuarios:
             cursor.connection.rollback()
             print(f"Error al eliminar la tarea: {e}")
 
-    # Verifica que ningun campo haya quedado vacio
+    # Verifica que ningún campo haya quedado vació
     def verificarValores_vacios(nombre, contrasena):
         if nombre == "" or contrasena == "":
             raise Exception("ERROR: No pueden haber campos vacios")

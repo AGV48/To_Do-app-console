@@ -2,13 +2,21 @@ class Usuario:
     """
     Representa a un usuario del software
     """
+
     def __init__(self, nombre, contrasena):
+        """
+        Constructor de la clase Usuario
+        
+        Entradas:
+        nombre (str): Nombre del usuario
+        contrasena (str): Contraseña del usuario
+        """
         self.nombre = nombre
         self.contrasena = contrasena
 
     def __repr__(self):
         """
-        Metodo para retornar los datos del usuario
+        Método para retornar los datos del usuario
         """
         return str(self.nombre)
 

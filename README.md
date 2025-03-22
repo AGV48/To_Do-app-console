@@ -53,7 +53,7 @@ Ejecuta el siguiente comando para instalar las dependencias del proyecto:
 poetry install
 ```
 Ejecutar el Proyecto
-Una vez configurado todo, puedes ejecutar la aplicación desde el archivo `app.py` ó desde la consola, Navegando a la raíz del proyecto y ejecutando:
+Una vez configurado todo, puedes ejecutar la aplicación desde la consola, Navegando a la raíz del proyecto y ejecutando:
 
 ```bash
 poetry run python app.py

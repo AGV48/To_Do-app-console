@@ -6,19 +6,10 @@ from datetime import datetime
 from todo_app.controladores.Controlador_Usuarios import Controlador_Usuarios
 from todo_app.model.Tarea import Tarea
 
-# Definimos la clase Tarea para almacenar la información de cada tarea
-class Tarea:
-    def __init__(self, titulo, descripcion, fecha_limite, prioridad):
-        self.titulo = titulo
-        self.descripcion = descripcion
-        self.fecha_limite = fecha_limite
-        self.prioridad = prioridad
-
-    def __str__(self):
-        return f"Tarea: {self.titulo}\nDescripción: {self.descripcion}\nFecha límite: {self.fecha_limite}\nPrioridad: {self.prioridad}\n"
-
-
 class Aplicacion:
+    """
+    Clase que contiene los métodos para crear, ver y eliminar tareas
+    """
     def Pagina_Principal(usuario):
         while True:
             print("---------------------------------------------------------------------")
